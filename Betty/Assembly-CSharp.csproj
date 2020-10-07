@@ -65,13 +65,15 @@
   <ItemGroup>
     <Compile Include="Assets\RobotSphere\Assets\Scripts\RobotFreeAnim.cs" />
     <Compile Include="Assets\Scripts\Main_CameraControl.cs" />
-    <Compile Include="Assets\Scripts\PlayerControl.cs" />
+    <Compile Include="Assets\Scripts\New Folder\PlayerControl.cs" />
+    <Compile Include="Assets\Scripts\New Folder\PlayerStatus.cs" />
     <Compile Include="Assets\Scripts\mashbreak.cs" />
     <Compile Include="Assets\Scripts\mesh_check.cs" />
     <Compile Include="Assets\map_object\camera\Camera_Control.cs" />
     <Compile Include="Assets\map_object\camera\Camera_Rnd.cs" />
     <Compile Include="Assets\map_object\camera\Camera_Rot.cs" />
     <Compile Include="Assets\map_object\camera\bullet.cs" />
+    <Compile Include="Assets\map_object\gamestatus\GameStatus.cs" />
     <Compile Include="Assets\map_object\teleportation\Warp_Point.cs" />
     <None Include="Assets\map_object\camera\SemiTransparent.shader" />
     <Reference Include="Unity.Timeline.Editor">
