@@ -4,7 +4,7 @@ public class PlayerControl : MonoBehaviour
 {
 
     public float speed = 3f;
-    public float jumpSpeed = 3f;
+    public float jumpSpeed = 5f;
 
     private Rigidbody rb;
     private float h, v;
@@ -25,7 +25,10 @@ public class PlayerControl : MonoBehaviour
         //移動
         h = Input.GetAxis("L_S_Horizontal");
         v = Input.GetAxis("L_S_Vertical");
-
+        if (Input.GetKey("a")) h = -1;
+        if (Input.GetKey("d")) h = 1;
+        if (Input.GetKey("w")) v = 1;
+        if (Input.GetKey("s")) v = -1;
         //足元から下へ向けてRayを発射し，着地判定をする
         isGrounded = Physics.Raycast(gameObject.transform.position + 0.1f * gameObject.transform.up, -gameObject.transform.up, 0.15f);
         //デバッグ用にシーンにRayを表示する
@@ -43,7 +46,7 @@ public class PlayerControl : MonoBehaviour
             }
             if (Input.GetButtonDown("Jump"))
             {
-                rb.velocity = new Vector3(rb.velocity.x, 5, rb.velocity.z);
+                rb.velocity = new Vector3(rb.velocity.x, jumpSpeed, rb.velocity.z);
             }
         }
     }
@@ -52,10 +55,16 @@ public class PlayerControl : MonoBehaviour
     {
         if (col.CompareTag("Behind"))
         {
-            if (Input.GetKeyDown("joystick button 1"))
+            if (Input.GetKeyDown("joystick button 1") || Input.GetKeyDown("j"))
             {
                 Playerstatus.JumppartsOn();
+                Destroy(col.transform.root.gameObject);
             }
         }
+    }
+
+    public void SetJumpSpeed(int jumpPower)
+    {
+        jumpSpeed = jumpPower;
     }
 }

@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Camera_Rot : MonoBehaviour
+public class camera_rot : MonoBehaviour
 {
     private Vector3 Rot;
     public float RotationSpeed = 0;

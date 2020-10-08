@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class bullet : MonoBehaviour
 {
@@ -18,7 +19,19 @@ public class bullet : MonoBehaviour
     void Update()
     {
         //弾を初期位置から、プレイヤーの位置に飛ばす
-        //gameObject.transform.position = Vector3.MoveTowards(gameObject.transform.position, PlayerPos, Time.deltaTime * BulletSpeed);
-        GetComponent<Rigidbody>().AddForce(PlayerPos, ForceMode.VelocityChange);
+        gameObject.transform.position = Vector3.MoveTowards(gameObject.transform.position, PlayerPos, Time.deltaTime * BulletSpeed);
+        if(gameObject.transform.position == PlayerPos)
+        {
+            Destroy(gameObject);
+        }
+        //GetComponent<Rigidbody>().AddForce(PlayerPos, ForceMode.VelocityChange);
+    }
+
+    private void OnTriggerEnter(Collider col)
+    {
+        if (col.CompareTag("Player"))
+        {
+            SceneManager.LoadScene("SampleScene");
+        }
     }
 }

@@ -38,7 +38,7 @@ public class Camera_Control : MonoBehaviour
                 Debug.DrawRay(gameobject.transform.position, (col.transform.position - gameobject.transform.position).normalized, Color.red, Mathf.Infinity);
                 if (Hit_player.collider.tag == "Player")//ヒットしたタグがプレイヤーか
                 {
-                    Invoke("CreateBullet", 1.0f);
+                    CreateBullet();
                     Status.GetComponent<GameStatus>().SetStatus(2);
                     MaterialColor.color = WarningColor.color;
                     Debug.Log("Ray_Hit");
