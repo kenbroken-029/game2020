@@ -10,6 +10,7 @@ public class PlayerControl : MonoBehaviour
     private float h, v;
     private Vector3 moveDirection = Vector3.zero;
     private bool isGrounded = false;
+    private bool isMoving = false;
 
     private PlayerStatus Playerstatus;
     void Start()
@@ -22,6 +23,7 @@ public class PlayerControl : MonoBehaviour
 
     void Update()
     {
+
         //移動
         h = Input.GetAxis("L_S_Horizontal");
         v = Input.GetAxis("L_S_Vertical");
@@ -36,6 +38,7 @@ public class PlayerControl : MonoBehaviour
 
         if (isGrounded || Mathf.Abs(rb.velocity.y) < 0.01f)
         {
+
             if (h != 0 || v != 0)
             //if(h != 0)
             {
@@ -43,10 +46,16 @@ public class PlayerControl : MonoBehaviour
                 //moveDirection = speed * new Vector3(h, 0, 0);   //奥に行けない
                 moveDirection = transform.TransformDirection(moveDirection);
                 rb.velocity = moveDirection;
+                isMoving = true;
+            }
+            else
+            {
+                isMoving = false;
             }
             if (Input.GetButtonDown("Jump"))
             {
                 rb.velocity = new Vector3(rb.velocity.x, jumpSpeed, rb.velocity.z);
+                isMoving = true;
             }
         }
     }
@@ -66,5 +75,10 @@ public class PlayerControl : MonoBehaviour
     public void SetJumpSpeed(int jumpPower)
     {
         jumpSpeed = jumpPower;
+    }
+
+    public bool GetisMoving()
+    {
+        return isMoving;
     }
 }
