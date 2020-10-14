@@ -960,7 +960,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Player_pos: {fileID: 1693613603}
   Wall_mat: {fileID: 2100000, guid: 98a4df47c6ff2074380574e1e8a5d9b3, type: 2}
-  gamestatus: {fileID: 0}
+  gamestatus: {fileID: 232627868}
   Gameobject: []
 --- !u!4 &517456370
 Transform:

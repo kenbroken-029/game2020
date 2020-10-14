@@ -10,6 +10,7 @@ public class StageStatus : MonoBehaviour
     private Vector3 Back_pos;
 
     [SerializeField] GameObject gamestatus;
+    private int statusnum;
     [SerializeField] Light[] Gameobject;
 
     // Start is called before the first frame update
@@ -22,6 +23,7 @@ public class StageStatus : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+
         if (Player_pos.position.z > Back_pos.z)
         {
             color.a = ChangeAlphacolor;
