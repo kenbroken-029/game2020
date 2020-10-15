@@ -2,42 +2,56 @@
 
 public class StageStatus : MonoBehaviour
 {
-    [SerializeField] private Transform Player_pos;
-    [SerializeField] private Material Wall_mat;
-    private Color color;
-    private float Alphacolor = 1.0f;
-    private float ChangeAlphacolor = 0.2f;
-    private Vector3 Back_pos;
+    [SerializeField] private Transform Player_pos;  //プレイヤーの位置取得
+    [SerializeField] private Material Wall_mat; //中央の壁取得
+    private Color color;    //中央の壁の色格納
+    private float Alphacolor;   //colorのα値最大
+    private float ChangeAlphacolor; //colorのα値を薄くする
+    private Vector3 Back_pos;   //奥に行ったかどうかの判定
 
-    [SerializeField] GameObject gamestatus;
-    private int statusnum;
+    //[SerializeField] GameObject countdown;
+    private GameStatus Gamestatus;
     [SerializeField] Light[] Gameobject;
 
     // Start is called before the first frame update
     void Start()
     {
-        color = Wall_mat.color;
+        //初期値設定----------------------------------------
+        color = Wall_mat.color; //Wall_matのcolorを格納
+        Alphacolor = 1.0f;  
+        ChangeAlphacolor = 0.2f;
         Back_pos = new Vector3(0, 0, 0);
+        Gamestatus = gameObject.GetComponent<GameStatus>();
+        //初期値設定----------------------------------------
     }
 
     // Update is called once per frame
     void Update()
     {
+        //常にstatusnumの値を取得する
+        //statusnum = gameObject.GetComponent<GameStatus>().GetStatus();
 
+        //プレイヤーが奥に移動したら
         if (Player_pos.position.z > Back_pos.z)
         {
-            color.a = ChangeAlphacolor;
-            Wall_mat.color = color;
+            color.a = ChangeAlphacolor; //壁を透けさせる
+            Wall_mat.color = color; //α値を代入
         }
         else
         {
-            color.a = Alphacolor;
-            Wall_mat.color = color;
+            color.a = Alphacolor;   //壁が現れる
+            Wall_mat.color = color; //α値を代入
         }
 
-        foreach (Light light in Gameobject)
+        //攻撃状態になったら
+        if (Gamestatus.Statusnum == GameStatus.Gamestatus.warning)
         {
-            light.color = new Color(1, 0, 0, 1);
+            //Lightを赤くする
+            foreach (Light light in Gameobject)
+            {
+                light.color = new Color(1, 0, 0, 1);    //ライトを赤くする
+                gameObject.GetComponent<CountDown>().CountFlgTrue();    //カウントダウンを開始する
+            }
         }
     }
 }

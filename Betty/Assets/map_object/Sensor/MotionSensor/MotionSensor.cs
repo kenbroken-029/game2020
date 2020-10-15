@@ -4,9 +4,9 @@ public class MotionSensor : MonoBehaviour
 {
     public int width;
     private Vector3 targetPos;
-    [SerializeField] GameObject Gamestatus;
-    private GameStatus Gamestatus_script;
-
+    //[SerializeField] GameObject Gamestatus;
+    public GameStatus Gamestatus_script;
+    //private GameStatus
     // Start is called before the first frame update
     void Start()
     {
@@ -25,7 +25,9 @@ public class MotionSensor : MonoBehaviour
         {
             if (col.GetComponent<PlayerControl>().GetisMoving() == true)
             {
-                Gamestatus.GetComponent<GameStatus>().SetStatus(2);
+                Gamestatus_script.Statusnum = GameStatus.Gamestatus.warning;
+                //gameObject.GetComponent<GameStatus>().Statusnum = GameStatus.Gamestatus.warning;
+                //base.Statusnum = GameStatus.Gamestatus.warning;
             }
         }
     }

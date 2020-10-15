@@ -2,7 +2,7 @@
 
 public class Camera_Control : MonoBehaviour
 {
-    [SerializeField] private GameObject Status;
+    //[SerializeField] private GameObject Status;
     private RaycastHit Hit_player;  //RaycastHit判定
 
     [SerializeField] private GameObject gameobject; //Rayポジション
@@ -12,6 +12,8 @@ public class Camera_Control : MonoBehaviour
     private Material MaterialColor;
 
     [SerializeField] GameObject bullet; //弾インスタンス
+
+    [SerializeField] GameStatus Gamestatus_script;
 
     // Start is called before the first frame update
     void Start()
@@ -39,10 +41,9 @@ public class Camera_Control : MonoBehaviour
                 if (Hit_player.collider.tag == "Player")//ヒットしたタグがプレイヤーか
                 {
                     CreateBullet();
-                    Status.GetComponent<GameStatus>().SetStatus(2);
+                    Gamestatus_script.Statusnum = GameStatus.Gamestatus.warning;
                     MaterialColor.color = WarningColor.color;
                     Debug.Log("Ray_Hit");
-                    //SceneManager.LoadScene("SampleScene");
                 }
             }
         }

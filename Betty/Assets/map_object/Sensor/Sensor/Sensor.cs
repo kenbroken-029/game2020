@@ -2,12 +2,12 @@
 
 public class Sensor : MonoBehaviour
 {
-    [SerializeField] GameObject Gamestatus;
-    private GameStatus Gamestatus_script;
+    //[SerializeField] GameObject Gamestatus;
+    [SerializeField] private GameStatus Gamestatus_script;
     // Start is called before the first frame update
     void Start()
     {
-        Gamestatus_script = GetComponent<GameStatus>();
+        //Gamestatus_script = GetComponent<GameStatus>();
     }
 
     // Update is called once per frame
@@ -20,7 +20,7 @@ public class Sensor : MonoBehaviour
     {
         if (col.CompareTag("Player"))
         {
-            Gamestatus.GetComponent<GameStatus>().SetStatus(2);
+            Gamestatus_script.Statusnum = GameStatus.Gamestatus.warning;
         }
     }
 }

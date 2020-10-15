@@ -2,22 +2,27 @@
 
 public class GameStatus : MonoBehaviour
 {
-    private int Statusnum = 0;
+    public enum Gamestatus
+    {
+        safe = 0,
+        caution = 1,
+        warning = 2
+    }
 
-    [SerializeField] Light[] Gameobject;
+    public Gamestatus Statusnum;
 
     // Start is called before the first frame update
     void Start()
     {
         switch (Statusnum)
         {
-            case 0: //safe,非警戒状態
+            case Gamestatus.safe: //safe,非警戒状態
 
                 break;
-            case 1: //caution,警戒状態
+            case Gamestatus.caution: //caution,警戒状態
 
                 break;
-            case 2: //warning,戦闘状態
+            case Gamestatus.warning: //warning,戦闘状態
 
                 break;
         }
@@ -28,29 +33,25 @@ public class GameStatus : MonoBehaviour
     {
         switch (Statusnum)
         {
-            case 0: //safe,非警戒状態
+            case Gamestatus.safe: //safe,非警戒状態
 
                 break;
-            case 1: //caution,警戒状態
+            case Gamestatus.caution: //caution,警戒状態
 
                 break;
-            case 2: //warning,戦闘状態
-                foreach (Light light in Gameobject)
-                {
-                    light.color = new Color(1, 0, 0, 1);
-                }
-                //Gameobject.color = new Color(1, 0, 0, 1);
+            case Gamestatus.warning: //warning,戦闘状態
+
                 break;
         }
         Debug.Log(Statusnum);
     }
 
-    public int GetStatus()
+    public Gamestatus GetStatus()
     {
         return Statusnum;
     }
 
-    public void SetStatus(int num)
+    public void SetStatus(Gamestatus num)
     {
         Statusnum = num;
     }
