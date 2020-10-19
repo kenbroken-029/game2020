@@ -2,12 +2,14 @@
 
 public class Sensor : MonoBehaviour
 {
-    //[SerializeField] GameObject Gamestatus;
-    [SerializeField] private GameStatus Gamestatus_script;
+    [SerializeField] GameObject Gamestatus;
+    private GameStatus Gamestatus_script;
+    private CountDown Countdown_script;
     // Start is called before the first frame update
     void Start()
     {
-        //Gamestatus_script = GetComponent<GameStatus>();
+        Gamestatus_script = Gamestatus.GetComponent<GameStatus>();
+        Countdown_script = Gamestatus.GetComponent<CountDown>();
     }
 
     // Update is called once per frame
@@ -20,7 +22,18 @@ public class Sensor : MonoBehaviour
     {
         if (col.CompareTag("Player"))
         {
-            Gamestatus_script.Statusnum = GameStatus.Gamestatus.warning;
+            if (Gamestatus_script.Statusnum == GameStatus.Gamestatus.warning)
+            {
+                Countdown_script.Countinit();
+            }
+            else if (Gamestatus_script.Statusnum == GameStatus.Gamestatus.caution)
+            {
+                Countdown_script.Countinit();
+            }
+            else
+            {
+                Gamestatus_script.Statusnum = GameStatus.Gamestatus.warning;
+            }
         }
     }
 }

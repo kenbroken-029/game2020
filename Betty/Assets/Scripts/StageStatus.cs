@@ -18,7 +18,7 @@ public class StageStatus : MonoBehaviour
     {
         //初期値設定----------------------------------------
         color = Wall_mat.color; //Wall_matのcolorを格納
-        Alphacolor = 1.0f;  
+        Alphacolor = 1.0f;
         ChangeAlphacolor = 0.2f;
         Back_pos = new Vector3(0, 0, 0);
         Gamestatus = gameObject.GetComponent<GameStatus>();
@@ -49,8 +49,30 @@ public class StageStatus : MonoBehaviour
             //Lightを赤くする
             foreach (Light light in Gameobject)
             {
-                light.color = new Color(1, 0, 0, 1);    //ライトを赤くする
+                light.color = new Color(1, 0, 0, 1);    //ライトを赤く
                 gameObject.GetComponent<CountDown>().CountFlgTrue();    //カウントダウンを開始する
+            }
+        }
+
+        //警戒状態になったら
+        if (Gamestatus.Statusnum == GameStatus.Gamestatus.caution)
+        {
+            //Lightを黄色くする
+            foreach (Light light in Gameobject)
+            {
+                light.color = new Color(1, 1, 0, 1);    //ライトを黄色
+                gameObject.GetComponent<CountDown>().CountFlgTrue();    //カウントダウンを開始する
+            }
+        }
+
+        //安全状態になったら
+        if (Gamestatus.Statusnum == GameStatus.Gamestatus.safe)
+        {
+            //Lightを白くする
+            foreach (Light light in Gameobject)
+            {
+                light.color = new Color(1, 1, 1, 1);    //ライトを白
+                //gameObject.GetComponent<CountDown>().CountFlgTrue();    //カウントダウンを開始する
             }
         }
     }
