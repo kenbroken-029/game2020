@@ -105,6 +105,7 @@
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\VertexShakeB.cs" />
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\VertexZoom.cs" />
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\WarpTextExample.cs" />
+    <Compile Include="Assets\map_object\Beltconveyor\BeltConveyor.cs" />
     <Compile Include="Assets\map_object\Sensor\MotionSensor\MotionSensor.cs" />
     <Compile Include="Assets\map_object\Sensor\Sensor\Sensor.cs" />
     <Compile Include="Assets\map_object\camera\Camera_Control.cs" />
