@@ -17,7 +17,7 @@ public class PlayerControl : MonoBehaviour
     {
         //Rigidbodyを取得し，回転しないように固定
         rb = GetComponent<Rigidbody>();
-        //rb.constraints = RigidbodyConstraints.FreezeRotation;
+        rb.constraints = RigidbodyConstraints.FreezeRotation;
         Playerstatus = GetComponent<PlayerStatus>();
     }
 
@@ -42,9 +42,9 @@ public class PlayerControl : MonoBehaviour
             if (h != 0 || v != 0)
             {
                 moveDirection = speed * new Vector3(h, 0, v);   //奥に行ける
-                //moveDirection = transform.TransformDirection(moveDirection);
-                //rb.velocity = moveDirection;
-                rb.AddForce(moveDirection);
+                moveDirection = transform.TransformDirection(moveDirection);
+                rb.velocity = moveDirection;
+                //rb.AddForce(moveDirection);
                 isMoving = true;
             }
             else
@@ -67,18 +67,18 @@ public class PlayerControl : MonoBehaviour
 
     void FixedUpdate()
     {
-        if (h == 0 && v == 0)
-        {
-            if (rb.velocity.magnitude < 0.5f)
-            {
-                // 速度を0にする
-                rb.velocity = Vector3.zero;
-                // 重力を無効にする
-                //rb.useGravity = false;
-                //回転を0にする
-                //rb.gameObject.transform.rotation = Quaternion.Euler(Vector3.zero);
-            }
-        }
+        //if (h == 0 && v == 0)
+        //{
+        //    if (rb.velocity.magnitude < 0.3f)
+        //    {
+        //        // 速度を0にする
+        //        rb.velocity = Vector3.zero;
+        //        // 重力を無効にする
+        //        //rb.useGravity = false;
+        //        //回転を0にする
+        //        //rb.gameObject.transform.rotation = Quaternion.Euler(Vector3.zero);
+        //    }
+        //}
     }
 
     private void OnTriggerStay(Collider col)
