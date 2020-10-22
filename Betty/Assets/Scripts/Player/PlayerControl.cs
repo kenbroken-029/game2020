@@ -53,11 +53,20 @@ public class PlayerControl : MonoBehaviour
             }
             if (Input.GetButtonDown("Jump"))
             {
-
+               
                 rb.velocity = new Vector3(rb.velocity.x, jumpSpeed, rb.velocity.z);
                 isMoving = true;
             }
         }
+        //if (isGrounded)
+        //{
+        //    if(h != 0)
+        //    {
+        //        moveDirection = (speed * new Vector3(h, 0, 0)) / 2;
+        //        moveDirection = transform.TransformDirection(moveDirection);
+        //        rb.velocity = moveDirection;
+        //    }
+        //}
         // 速度ベクトルを表示
         Debug.Log("速度ベクトル: " + rb.velocity);
 

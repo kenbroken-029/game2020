@@ -5,6 +5,7 @@ public class Sensor : MonoBehaviour
     [SerializeField] GameObject Gamestatus;
     private GameStatus Gamestatus_script;
     private CountDown Countdown_script;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -28,6 +29,7 @@ public class Sensor : MonoBehaviour
             }
             else if (Gamestatus_script.Statusnum == GameStatus.Gamestatus.caution)
             {
+                Gamestatus_script.Statusnum = GameStatus.Gamestatus.warning;
                 Countdown_script.Countinit();
             }
             else
