@@ -2,6 +2,7 @@
 
 public class PlayerControl : MonoBehaviour
 {
+    public bool jumpflg = false;
 
     public float speed = 3f;
     public float jumpSpeed = 5f;
@@ -31,78 +32,77 @@ public class PlayerControl : MonoBehaviour
         if (Input.GetKey("d")) h = 1;
         if (Input.GetKey("w")) v = 1;
         if (Input.GetKey("s")) v = -1;
+        if (Mathf.Abs(rb.velocity.y) < 0.01f)
+        {
+            if (Input.GetButtonDown("Jump")) jumpflg = true;
+        }
+
         //足元から下へ向けてRayを発射し，着地判定をする
-        isGrounded = Physics.Raycast(gameObject.transform.position + 0.1f * gameObject.transform.up, -gameObject.transform.up, 0.15f);
+        isGrounded = Physics.Raycast(gameObject.transform.position + 0.1f * gameObject.transform.up, -gameObject.transform.up, 0.2f);
         //デバッグ用にシーンにRayを表示する
         Debug.DrawRay(gameObject.transform.position + 0.1f * gameObject.transform.up, -0.15f * gameObject.transform.up, Color.blue, 100f);
-
-        if (isGrounded || Mathf.Abs(rb.velocity.y) < 0.01f)
-        {
-
-            if (h != 0 || v != 0)
-            {
-                moveDirection = speed * new Vector3(h, 0, v);   //奥に行ける
-                moveDirection = transform.TransformDirection(moveDirection);
-                rb.velocity = moveDirection;
-                //rb.AddForce(moveDirection);
-                isMoving = true;
-            }
-            else
-            {
-                isMoving = false;
-            }
-            if (Input.GetButtonDown("Jump"))
-            {
-               
-                rb.velocity = new Vector3(rb.velocity.x, jumpSpeed, rb.velocity.z);
-                isMoving = true;
-            }
-        }
-        //if (isGrounded)
-        //{
-        //    if(h != 0)
-        //    {
-        //        moveDirection = (speed * new Vector3(h, 0, 0)) / 2;
-        //        moveDirection = transform.TransformDirection(moveDirection);
-        //        rb.velocity = moveDirection;
-        //    }
-        //}
-        // 速度ベクトルを表示
-        Debug.Log("速度ベクトル: " + rb.velocity);
-
-        // 速度を表示
-        Debug.Log("速度: " + rb.velocity.magnitude);
     }
 
     void FixedUpdate()
     {
-        //if (h == 0 && v == 0)
-        //{
-        //    if (rb.velocity.magnitude < 0.3f)
-        //    {
-        //        // 速度を0にする
-        //        rb.velocity = Vector3.zero;
-        //        // 重力を無効にする
-        //        //rb.useGravity = false;
-        //        //回転を0にする
-        //        //rb.gameObject.transform.rotation = Quaternion.Euler(Vector3.zero);
-        //    }
-        //}
+        if (isGrounded || Mathf.Abs(rb.velocity.y) < 0.01f)
+        {
+
+            //if (h != 0 || v != 0)
+            //{
+            moveDirection = speed * new Vector3(h, 0, v);   //奥に行ける
+            moveDirection = transform.TransformDirection(moveDirection);
+            rb.velocity = moveDirection;
+            isMoving = true;
+            //}
+            if (h == 0 || v == 0)
+            {
+                isMoving = false;
+            }
+            if (jumpflg)
+            {
+                //rb.velocity = new Vector3(rb.velocity.x, jumpSpeed, rb.velocity.z);
+                rb.AddForce(transform.up * jumpSpeed);
+                //rb.velocity = new Vector3(h, jumpSpeed, v);
+                isMoving = true;
+                jumpflg = false;
+                Debug.Log("jump");
+            }
+        }
+
+        if (!isGrounded)
+        {
+            //if (h != 0 || v != 0)
+            //{
+            //rb.velocity = Vector3.zero;
+            moveDirection = speed * new Vector3(h, 0, v);   //奥に行ける
+            moveDirection = transform.TransformDirection(moveDirection);
+            //rb.velocity = moveDirection;
+            //rb.AddForce(moveDirection);
+            isMoving = true;
+            if (rb.velocity.magnitude < 3.5f)
+            {
+                rb.AddForce(moveDirection);
+            }
+            //}
+        }
     }
 
     private void OnTriggerStay(Collider col)
     {
-        if (col.CompareTag("Behind"))
+        if (col.CompareTag("Enemy"))
         {
             if (Input.GetKeyDown("joystick button 1") || Input.GetKeyDown("j"))
             {
                 Playerstatus.JumppartsOn();
-                Destroy(col.transform.root.gameObject);
+                Destroy(gameObject);
+                col.tag = "Player";
+                col.GetComponent<walkrobotcontroll>().enabled = true;
             }
         }
     }
 
-    public void SetJumpSpeed(int jumpPower)
+    public void SetJumpSpeed(float jumpPower)
     {
         jumpSpeed = jumpPower;
     }

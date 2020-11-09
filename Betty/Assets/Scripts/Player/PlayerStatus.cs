@@ -9,13 +9,14 @@ public class PlayerStatus : MonoBehaviour
     public int cansel;
 
     private PlayerControl Playercontrol;
-    private int HiJumppower = 7;
-    private int Jumppower = 5;
+    private float HiJumppower = 350;
+    private float Jumppower;
 
     // Start is called before the first frame update
     void Start()
     {
         Playercontrol = GetComponent<PlayerControl>();
+        Jumppower = Playercontrol.jumpSpeed;
     }
 
     // Update is called once per frame

@@ -2,7 +2,8 @@
 
 public class StageStatus : MonoBehaviour
 {
-    [SerializeField] private Transform Player_pos;  //プレイヤーの位置取得
+    private GameObject Player;  //プレイヤー取得
+    private Transform Player_pos;   //プレイヤーの位置取得
     [SerializeField] private Material Wall_mat; //中央の壁取得
     private Color color;    //中央の壁の色格納
     private float Alphacolor;   //colorのα値最大
@@ -22,12 +23,16 @@ public class StageStatus : MonoBehaviour
         ChangeAlphacolor = 0.2f;
         Back_pos = new Vector3(0, 0, 0);
         Gamestatus = gameObject.GetComponent<GameStatus>();
+        Player = GameObject.FindWithTag("Player");
+        Player_pos = Player.transform;
         //初期値設定----------------------------------------
     }
 
     // Update is called once per frame
     void Update()
     {
+        Player = GameObject.FindWithTag("Player");
+        Player_pos = Player.transform;
         //常にstatusnumの値を取得する
         //statusnum = gameObject.GetComponent<GameStatus>().GetStatus();
 
@@ -75,5 +80,9 @@ public class StageStatus : MonoBehaviour
                 //gameObject.GetComponent<CountDown>().CountFlgTrue();    //カウントダウンを開始する
             }
         }
+    }
+
+    private void FixedUpdate()
+    {
     }
 }

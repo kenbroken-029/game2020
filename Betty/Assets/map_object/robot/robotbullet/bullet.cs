@@ -10,7 +10,7 @@ public class bullet : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        Player = GameObject.Find("Player").transform;   //プレイヤー取得
+        Player = GameObject.FindWithTag("Player").transform;   //プレイヤー取得
         PlayerPos = Player.position;    //プレイヤーの位置保存
 
     }
@@ -20,7 +20,7 @@ public class bullet : MonoBehaviour
     {
         //弾を初期位置から、プレイヤーの位置に飛ばす
         gameObject.transform.position = Vector3.MoveTowards(gameObject.transform.position, PlayerPos, Time.deltaTime * BulletSpeed);
-        if(gameObject.transform.position == PlayerPos)
+        if (gameObject.transform.position == PlayerPos)
         {
             Destroy(gameObject);
         }
