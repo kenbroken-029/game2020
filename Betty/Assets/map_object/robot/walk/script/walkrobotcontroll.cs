@@ -44,8 +44,15 @@ public class walkrobotcontroll : MonoBehaviour
         }
         if (h > 0.01f)
         {
-            Walk_Robot.SetBool("walkflg", false);
-            Walk_Robot.SetBool("walkflg_", true);
+            if(Walk_Robot.GetBool("walkflg1") == true)
+            {
+                Walk_Robot.SetTrigger("walktrigger1");
+            }
+            else
+            {
+                Walk_Robot.SetBool("walkflg2", false);
+                Walk_Robot.SetBool("walkflg1", true);
+            }
         }
         else if (h < -0.01f)
         {
@@ -54,8 +61,8 @@ public class walkrobotcontroll : MonoBehaviour
         }
         else
         {
-            Walk_Robot.SetBool("walkflg", false);
-            Walk_Robot.SetBool("walkflg_", false);
+            Walk_Robot.SetBool("walkflg1", false);
+            Walk_Robot.SetBool("walkflg2", false);
         }
 
         //足元から下へ向けてRayを発射し，着地判定をする
