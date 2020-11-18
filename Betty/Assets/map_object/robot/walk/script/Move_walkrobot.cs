@@ -10,6 +10,7 @@ public class Move_walkrobot : MonoBehaviour
 
     private Animator animator;
     private bool flg_;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -30,11 +31,19 @@ public class Move_walkrobot : MonoBehaviour
         }
         if (flg && !flg_)
         {
-            animator.SetBool("walkflg", true);
+            if (animator.GetBool("walkflg2") == true)
+            {
+                animator.SetTrigger("walktrigger2");
+            }
+            else
+            {
+                animator.SetBool("walkflg1", false);
+                animator.SetBool("walkflg2", true);
+            }
             transform.position = Vector3.Lerp(DronePos, DronePos_.transform.position, time);
             if (time > 1)
             {
-                animator.SetBool("walkflg", false);
+                animator.SetBool("walkflg2", false);
                 //DronePos = transform.position;
                 flg = false;
                 flg_ = true;
@@ -43,11 +52,19 @@ public class Move_walkrobot : MonoBehaviour
         }
         if (flg && flg_)
         {
-            animator.SetBool("walkflg_", true);
+            if (animator.GetBool("walkflg1") == true)
+            {
+                animator.SetTrigger("walktrigger1");
+            }
+            else
+            {
+                animator.SetBool("walkflg2", false);
+                animator.SetBool("walkflg1", true);
+            }
             transform.position = Vector3.Lerp(DronePos_.transform.position, DronePos, time);
             if (time > 1)
             {
-                animator.SetBool("walkflg_", false);
+                animator.SetBool("walkflg1", false);
                 //DronePos = transform.position;
                 flg = false;
                 flg_ = false;

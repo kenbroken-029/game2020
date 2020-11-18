@@ -17,6 +17,9 @@ public class walkrobotcontroll : MonoBehaviour
     public GameObject CameraScan;
     private Animator Walk_Robot;
 
+    private float time;
+    public GameObject Player;
+
     void Start()
     {
         //Rigidbodyを取得し，回転しないように固定
@@ -30,6 +33,7 @@ public class walkrobotcontroll : MonoBehaviour
 
     void Update()
     {
+        time += Time.deltaTime;
 
         //移動
         h = Input.GetAxis("L_S_Horizontal");
@@ -42,9 +46,9 @@ public class walkrobotcontroll : MonoBehaviour
         {
             if (Input.GetButtonDown("Jump")) jumpflg = true;
         }
-        if (h > 0.01f)
+        if (h > 0.01f || v > 0.1f)
         {
-            if(Walk_Robot.GetBool("walkflg1") == true)
+            if (Walk_Robot.GetBool("walkflg1") == true)
             {
                 Walk_Robot.SetTrigger("walktrigger1");
             }
@@ -54,12 +58,19 @@ public class walkrobotcontroll : MonoBehaviour
                 Walk_Robot.SetBool("walkflg1", true);
             }
         }
-        else if (h < -0.01f)
+        if (h < -0.01f || h < -0.1f)
         {
-            Walk_Robot.SetBool("walkflg_", false);
-            Walk_Robot.SetBool("walkflg", true);
+            if (Walk_Robot.GetBool("walkflg2") == true)
+            {
+                Walk_Robot.SetTrigger("walktrigger2");
+            }
+            else
+            {
+                Walk_Robot.SetBool("walkflg1", false);
+                Walk_Robot.SetBool("walkflg2", true);
+            }
         }
-        else
+        if (h > -0.1f && h < 0.1f && v > -0.1f && v < 0.1f)
         {
             Walk_Robot.SetBool("walkflg1", false);
             Walk_Robot.SetBool("walkflg2", false);
@@ -69,6 +80,12 @@ public class walkrobotcontroll : MonoBehaviour
         isGrounded = Physics.Raycast(gameObject.transform.position + 0.1f * gameObject.transform.up, -gameObject.transform.up, 0.2f);
         //デバッグ用にシーンにRayを表示する
         Debug.DrawRay(gameObject.transform.position + 0.1f * gameObject.transform.up, -0.15f * gameObject.transform.up, Color.blue, 100f);
+
+        if (time > 15.0f)
+        {
+            Instantiate(Player, gameObject.transform.position, Quaternion.identity);
+            Destroy(gameObject);
+        }
     }
 
     void FixedUpdate()
