@@ -10,6 +10,7 @@ public class StageStatus : MonoBehaviour
     private float ChangeAlphacolor; //colorのα値を薄くする
     private Vector3 Back_pos;   //奥に行ったかどうかの判定
 
+    public GameObject Partition;
     //[SerializeField] GameObject countdown;
     private GameStatus Gamestatus;
     [SerializeField] Light[] Gameobject;
@@ -41,11 +42,13 @@ public class StageStatus : MonoBehaviour
         {
             color.a = ChangeAlphacolor; //壁を透けさせる
             Wall_mat.color = color; //α値を代入
+            Partition.SetActive(false);
         }
         else
         {
             color.a = Alphacolor;   //壁が現れる
             Wall_mat.color = color; //α値を代入
+            Partition.SetActive(true);
         }
 
         //攻撃状態になったら

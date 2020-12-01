@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using UnityEngine.UI;
 
 public class PlayerControl : MonoBehaviour
 {
@@ -14,6 +15,9 @@ public class PlayerControl : MonoBehaviour
     private bool isMoving = false;
 
     private PlayerStatus Playerstatus;
+
+    public Image Gauge_image;
+
     void Start()
     {
         //Rigidbodyを取得し，回転しないように固定
@@ -90,15 +94,54 @@ public class PlayerControl : MonoBehaviour
 
     private void OnTriggerStay(Collider col)
     {
-        if (col.CompareTag("Enemy"))
+        if (col.CompareTag("DroneRobot"))
         {
-            if (Input.GetKeyDown("joystick button 1") || Input.GetKeyDown("j"))
+            if (Input.GetKey("joystick button 1") || Input.GetKeyDown("j"))
             {
-                Playerstatus.JumppartsOn();
-                Destroy(gameObject);
-                col.tag = "Player";
-                col.GetComponent<walkrobotcontroll>().enabled = true;
+                if (Gauge_image.fillAmount > 0.99f)
+                {
+                    //Playerstatus.JumppartsOn();
+                    Destroy(gameObject);
+                    col.tag = "Player";
+                    col.GetComponent<DroneControl>().enabled = true;
+                }
+                Gauge_image.fillAmount += Time.deltaTime;
             }
+            if (Input.GetKeyUp("joystick button 1"))
+            {
+                Gauge_image.fillAmount = 0;
+            }
+        }
+
+        if (col.CompareTag("WalkRobot"))
+        {
+            if (Input.GetKey("joystick button 1") || Input.GetKeyDown("j"))
+            {
+                if (Gauge_image.fillAmount > 0.99f)
+                {
+                    //Playerstatus.JumppartsOn();
+                    Destroy(gameObject);
+                    col.tag = "Player";
+                    col.GetComponent<walkrobotcontroll>().enabled = true;
+                    Gauge_image.fillAmount = 0;
+                }
+                Gauge_image.fillAmount += Time.deltaTime;
+            }
+            if (Input.GetKeyUp("joystick button 1"))
+            {
+                Gauge_image.fillAmount = 0;
+            }
+        }
+    }
+    private void OnTriggerExit(Collider col)
+    {
+        if (col.CompareTag("WalkRobot"))
+        {
+            Gauge_image.fillAmount = 0;
+        }
+        if (col.CompareTag("DroneRobot"))
+        {
+            Gauge_image.fillAmount = 0;
         }
     }
 

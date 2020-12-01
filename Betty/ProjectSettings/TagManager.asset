@@ -6,6 +6,8 @@ TagManager:
   tags:
   - Behind
   - Enemy
+  - WalkRobot
+  - DroneRobot
   layers:
   - Default
   - TransparentFX

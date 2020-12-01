@@ -63,6 +63,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Assets\Breakable Windows\Scripts\BreakableWindow.cs" />
     <Compile Include="Assets\RobotSphere\Assets\Scripts\RobotFreeAnim.cs" />
     <Compile Include="Assets\Scripts\CountDown\CountDown.cs" />
     <Compile Include="Assets\Scripts\GameSystem.cs" />
@@ -113,6 +114,7 @@
     <Compile Include="Assets\map_object\robot\Camera_Control.cs" />
     <Compile Include="Assets\map_object\robot\Camera_Rnd.cs" />
     <Compile Include="Assets\map_object\robot\camera_rot.cs" />
+    <Compile Include="Assets\map_object\robot\drone\DroneControl.cs" />
     <Compile Include="Assets\map_object\robot\drone\Move_drone.cs" />
     <Compile Include="Assets\map_object\robot\robotbullet\bullet.cs" />
     <Compile Include="Assets\map_object\robot\test.cs" />
