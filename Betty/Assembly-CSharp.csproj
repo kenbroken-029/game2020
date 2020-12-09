@@ -106,6 +106,9 @@
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\VertexShakeB.cs" />
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\VertexZoom.cs" />
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\WarpTextExample.cs" />
+    <Compile Include="Assets\UI\UI_scripts\StageSelect.cs" />
+    <Compile Include="Assets\UI\UI_scripts\Top.cs" />
+    <Compile Include="Assets\UI\UI_scripts\menu.cs" />
     <Compile Include="Assets\map_object\Beltconveyor\BeltConveyor.cs" />
     <Compile Include="Assets\map_object\Sensor\MotionSensor\MotionSensor.cs" />
     <Compile Include="Assets\map_object\Sensor\Sensor\Sensor.cs" />
